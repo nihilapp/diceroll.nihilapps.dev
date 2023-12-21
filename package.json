@@ -1,17 +1,17 @@
 {
-  "name": "nihil-next-template",
+  "name": "diceroll.nihilapps.dev",
   "version": "1.0.0",
   "description": "Nextjs 편하게 쓰려고 만든 템플릿. 타입스크립트 기본 지원.",
   "main": "index.js",
   "proxy": "http://localhost:4000",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nihil-template/nihil-next-template.git"
+    "url": "git+https://github.com/nihilapp/diceroll.nihilapps.dev.git"
   },
   "bugs": {
-    "url": "https://github.com/nihil-template/nihil-next-template/issues"
+    "url": "https://github.com/nihilapp/diceroll.nihilapps.dev/issues"
   },
-  "homepage": "https://github.com/nihil-template/nihil-next-template#readme",
+  "homepage": "https://github.com/nihilapp/diceroll.nihilapps.dev#readme",
   "scripts": {
     "remove": "rm -rf node_modules/.cache && rm -rf build/",
     "serve": "yarn run remove && next dev",
@@ -31,6 +31,7 @@
     "@tanstack/react-query-devtools": "^5.14.2",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
+    "googleapis": "^129.0.0",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
