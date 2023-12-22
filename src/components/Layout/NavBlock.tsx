@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { supabase } from '@/src/utils/supabase/client';
 import { Nihil } from '@/src/utils/nihil';
 import {
-  ProviderType, setProvider, setSession, setUser
+  ProviderType, authStore, setProvider, setSession, setUser
 } from '@/src/store/auth.store';
 import { Auth } from '@/src/utils/auth';
 
@@ -23,6 +23,11 @@ export function NavBlock({ styles, }: Props) {
   ] = useState(0);
 
   const pathName = usePathname();
+
+  const { session, user, } = authStore();
+
+  console.log('session >> ', session);
+  console.log('user >> ', user);
 
   useEffect(() => {
     const { data, } = supabase.auth.onAuthStateChange(
