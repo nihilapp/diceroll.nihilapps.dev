@@ -1,10 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
-
-const baseUrl = 'http://localhost:4000';
+import { configData } from '../data';
 
 const config: AxiosRequestConfig = {
   withCredentials: true,
-  baseURL: baseUrl,
+  baseURL: configData.baseApiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
