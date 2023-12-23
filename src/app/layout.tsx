@@ -54,7 +54,6 @@ export default function layout({ children, }: Props) {
       <body className={notoSansKR.className}>
         <Providers>
           <HeaderBlock />
-          <NavBlock />
           <MainBlock>
             {children}
           </MainBlock>

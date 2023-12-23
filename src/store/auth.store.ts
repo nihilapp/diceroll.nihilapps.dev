@@ -16,12 +16,9 @@ export const authStore = create(
     session: null,
     provider: '',
   }), {
-    name: 'state/auth',
+    name: 'nihilapps/auth',
     storage: createJSONStorage(() => sessionStorage),
     skipHydration: true,
-    onRehydrateStorage(state) {
-      console.log('state >> ', state);
-    },
   })
 );
 

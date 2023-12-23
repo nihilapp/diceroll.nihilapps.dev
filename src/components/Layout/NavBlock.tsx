@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -35,7 +35,9 @@ export function NavBlock({ styles, }: Props) {
         switch (event) {
           case 'INITIAL_SESSION':
           case 'SIGNED_IN': {
-            if (session?.user) {
+            if (session?.user === undefined) {
+              console.log('[세션] 로그아웃 상태.');
+            } else if (session?.user) {
               let userName: string;
 
               if (!session.user.user_metadata.userName) {
@@ -44,29 +46,46 @@ export function NavBlock({ styles, }: Props) {
                 userName = session.user.user_metadata.userName;
               }
 
-              supabase.auth.updateUser({
-                data: {
-                  provider_token: session.provider_token,
-                  provider_refresh_token: session.provider_refresh_token,
-                  exp: Nihil.date(session.expires_at * 1000).format(),
-                  userName,
-                },
-              }).then(({ data: { user, }, }) => {
-                setUser(user);
-
-                const newSession = { ...session, };
-                newSession.user = { ...user, };
-
-                setSession(newSession);
-
-                console.log('[세션] 세션 정보 업데이트');
-              });
-            } else {
               setUser(session?.user);
               setSession(session);
               setProvider(session?.user.app_metadata.provider as ProviderType);
 
               console.log('[세션] 로그인');
+
+              if (session.user.app_metadata.provider === 'google') {
+                supabase.auth.updateUser({
+                  data: {
+                    provider_token: session.provider_token,
+                    provider_refresh_token: session.provider_refresh_token,
+                    exp: Nihil.date(session.expires_at * 1000).format(),
+                    userName,
+                  },
+                }).then(({ data: { user, }, }) => {
+                  setUser(user);
+
+                  const newSession = { ...session, };
+                  newSession.user = { ...user, };
+
+                  setSession(newSession);
+
+                  console.log('[세션] 세션 정보 업데이트');
+                });
+              } else {
+                supabase.auth.updateUser({
+                  data: {
+                    userName,
+                  },
+                }).then(({ data: { user, }, }) => {
+                  setUser(user);
+
+                  const newSession = { ...session, };
+                  newSession.user = { ...user, };
+
+                  setSession(newSession);
+
+                  console.log('[세션] 세션 정보 업데이트');
+                });
+              }
             }
             return;
           }
@@ -142,6 +161,13 @@ export function NavBlock({ styles, }: Props) {
     };
   }, [ pathName, number, ]);
 
+  const onClickSignOut = useCallback(
+    async () => {
+      await supabase.auth.signOut();
+    },
+    []
+  );
+
   const css = {
     default: twJoin([
       ``,
@@ -152,8 +178,19 @@ export function NavBlock({ styles, }: Props) {
   return (
     <>
       <nav className={css.default}>
-        <Link href='/'>홈</Link>
-        <Link href='/example'>예시</Link>
+        <Link href='/' as='/'>홈</Link>
+        <Link href='/roll' as='/roll'>주사위</Link>
+        {user ? (
+          <>
+            <Link href='/mypage' as='/mypage'>마이페이지</Link>
+            <button onClick={onClickSignOut}>로그아웃</button>
+          </>
+        ) : (
+          <>
+            <Link href='/signup' as='/signup'>회원가입</Link>
+            <Link href='/signin' as='/signin'>로그인</Link>
+          </>
+        )}
       </nav>
     </>
   );

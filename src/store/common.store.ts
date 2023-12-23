@@ -9,7 +9,7 @@ export const commonStore = create(
   persist<CommonStoreState>(() => ({
     word: 'JavaScript',
   }), {
-    name: 'state/common',
+    name: 'nihilapps/common',
     skipHydration: true,
     storage: createJSONStorage(() => localStorage),
   })

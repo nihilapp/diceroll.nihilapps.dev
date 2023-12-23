@@ -9,7 +9,7 @@ export class configData {
   static type = '';
   static url = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : '';
+    : 'https://diceroll.nihilapps.dev';
   static image = '';
   static version = 'v0.0.0';
   static baseApiUrl = `${this.url}/api`;
