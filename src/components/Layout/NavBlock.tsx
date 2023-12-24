@@ -5,6 +5,7 @@ import { ClassNameValue, twJoin } from 'tailwind-merge';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { toast } from 'react-toastify';
+import { Icon } from '@iconify/react';
 import { supabase } from '@/src/utils/supabase/client';
 import { Nihil } from '@/src/utils/nihil';
 import {
@@ -170,27 +171,50 @@ export function NavBlock({ styles, }: Props) {
 
   const css = {
     default: twJoin([
-      ``,
+      `bg-black-500 border-b-2 border-black-base`,
       styles,
+    ]),
+    container: twJoin([
+      `flex flex-row gap-1 items-center justify-center w-full mf-sm:w-full mf-md:w-full mf-md:max-w-[900px] mx-auto p-2`,
+    ]),
+    link: twJoin([
+      `text-white p-1 px-2 flex flex-row items-center gap-1 text-middle hover:bg-white hover:text-black-base rounded-1 transition-colors duration-200`,
+    ]),
+    button: twJoin([
+      ``,
     ]),
   };
 
   return (
     <>
       <nav className={css.default}>
-        <Link href='/' as='/'>홈</Link>
-        <Link href='/roll' as='/roll'>주사위</Link>
-        {user ? (
-          <>
-            <Link href='/mypage' as='/mypage'>마이페이지</Link>
-            <button onClick={onClickSignOut}>로그아웃</button>
-          </>
-        ) : (
-          <>
-            <Link href='/signup' as='/signup'>회원가입</Link>
-            <Link href='/signin' as='/signin'>로그인</Link>
-          </>
-        )}
+        <div className={css.container}>
+          <Link href='/' as='/' className={css.link}>
+            <Icon icon='mdi:home' /> 홈
+          </Link>
+          <Link href='/roll' as='/roll' className={css.link}>
+            <Icon icon='game-icons:dice-twenty-faces-twenty' /> 주사위
+          </Link>
+          {user ? (
+            <>
+              <Link href='/mypage' as='/mypage' className={css.link}>
+                <Icon icon='mdi:user' /> 마이페이지
+              </Link>
+              <button onClick={onClickSignOut} className={css.button}>
+                <Icon icon='mdi:logout-variant' /> 로그아웃
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href='/signup' as='/signup' className={css.link}>
+                <Icon icon='mdi:user-plus' /> 회원가입
+              </Link>
+              <Link href='/signin' as='/signin' className={css.link}>
+                <Icon icon='mdi:login-variant' /> 로그인
+              </Link>
+            </>
+          )}
+        </div>
       </nav>
     </>
   );
