@@ -4,6 +4,7 @@ import React, { useCallback } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import Link from 'next/link';
+import { AuthIcon } from '@/src/components/Content/AuthIcon';
 
 interface Props {
   styles?: ClassNameValue;
@@ -42,7 +43,7 @@ export function SignInForm({ styles, }: Props) {
       `flex flex-col gap-1`,
     ]),
     label: twJoin([
-      `font-500 text-middle`,
+      `font-900 text-middle`,
     ]),
     input: twJoin([
       `p-3 bg-black-100 rounded-1`,
@@ -105,17 +106,17 @@ export function SignInForm({ styles, }: Props) {
             <span className={css.errorMessage}>{errors.password.message}</span>
           )}
         </div>
-        <div className='divide-x divide-black-100 text-right font-500 text-black-base'>
-          <Link href='/signin/find' className='pr-2'>이메일 찾기</Link>
-          <Link href='/signin/password-reset' className='pl-2'>비밀번호 재설정</Link>
+        <div className='divide-x divide-black-100 text-right font-500'>
+          <Link href='/signin/find' className='pr-2 text-blue-500 hover:underline hover:text-blue-600'>이메일 찾기</Link>
+          <Link href='/signin/password-reset' className='pl-2 text-blue-500 hover:underline hover:text-blue-600'>비밀번호
+            재설정
+          </Link>
         </div>
         <button className={css.button}>로그인</button>
+        <button type='button' className='p-3 text-middle border border-black-base text-black-base rounded-1 font-500 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors duration-200'>회원가입</button>
       </form>
 
-      <div>
-        <button>구글로 로그인</button>
-        <button>깃허브로 로그인</button>
-      </div>
+      <AuthIcon />
     </>
   );
 }
