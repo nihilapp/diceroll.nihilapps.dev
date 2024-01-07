@@ -4,7 +4,10 @@ import React, { useCallback } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 import { AuthIcon } from '@/src/components/Content/AuthIcon';
+import { supabase } from '@/src/utils/supabase/client';
 
 interface Props {
   styles?: ClassNameValue;
@@ -23,10 +26,25 @@ export function SignInForm({ styles, }: Props) {
       errors,
     },
   } = useForm<Inputs>({ mode: 'all', });
+  const router = useRouter();
 
   const onSubmitForm: SubmitHandler<Inputs> = useCallback(
     (data) => {
-      console.log(data);
+      supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      }).then((response) => {
+        if (response.error) {
+          toast.error('로그인 실패. 이메일이나 비밀번호를 확인해주세요.');
+        }
+      });
+    },
+    []
+  );
+
+  const goToSignUp = useCallback(
+    () => {
+      router.push('/signup');
     },
     []
   );
@@ -46,7 +64,7 @@ export function SignInForm({ styles, }: Props) {
       `font-900 text-middle`,
     ]),
     input: twJoin([
-      `p-3 bg-black-100 rounded-1`,
+      `p-3 bg-black-100 rounded-1 border-b-2 border-black-100 outline-none`,
     ]),
     errorMessage: twJoin([
       `text-red-500 italic font-900 text-middle`,
@@ -65,7 +83,7 @@ export function SignInForm({ styles, }: Props) {
             <input
               type='email'
               id='email'
-              className={css.input}
+              className={twJoin(css.input, errors.email && `border-red-500`)}
               {...register('email', {
                 required: {
                   value: true,
@@ -88,7 +106,7 @@ export function SignInForm({ styles, }: Props) {
             <input
               type='password'
               id='password'
-              className={css.input}
+              className={twJoin(css.input, errors.password && `border-red-500`)}
               autoComplete='off'
               {...register('password', {
                 required: {
@@ -113,7 +131,7 @@ export function SignInForm({ styles, }: Props) {
           </Link>
         </div>
         <button className={css.button}>로그인</button>
-        <button type='button' className='p-3 text-middle border border-black-base text-black-base rounded-1 font-500 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors duration-200'>회원가입</button>
+        <button type='button' className='p-3 text-middle border border-black-base text-black-base rounded-1 font-500 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-colors duration-200' onClick={goToSignUp}>회원가입</button>
       </form>
 
       <AuthIcon />

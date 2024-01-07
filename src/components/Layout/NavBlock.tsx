@@ -181,7 +181,7 @@ export function NavBlock({ styles, }: Props) {
       `text-white p-1 px-2 flex flex-row items-center gap-1 text-middle hover:bg-white hover:text-black-base rounded-1 transition-colors duration-200`,
     ]),
     button: twJoin([
-      ``,
+      `text-white p-1 px-2 flex flex-row items-center gap-1 text-middle hover:bg-white hover:text-black-base rounded-1 transition-colors duration-200`,
     ]),
   };
 

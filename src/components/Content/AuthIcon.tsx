@@ -5,22 +5,42 @@ import { ClassNameValue, twJoin } from 'tailwind-merge';
 import Image from 'next/image';
 import googleIcon from '@/src/images/icon/google-icon.png';
 import githubIcon from '@/src/images/icon/github-icon.png';
+import { supabase } from '@/src/utils/supabase/client';
 
 interface Props {
   styles?: ClassNameValue;
 }
 
+const scopes = [
+  'https://www.googleapis.com/auth/drive',
+];
+
 export function AuthIcon({ styles, }: Props) {
   const onClickGoogleSignIn = useCallback(
-    () => {
-      console.log('구글로 로그인');
+    async () => {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: '/',
+          scopes: scopes.join(' '),
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        },
+      });
     },
     []
   );
 
   const onClickGithubSignIn = useCallback(
-    () => {
-      console.log('깃허브로 로그인');
+    async () => {
+      await supabase.auth.signInWithOAuth({
+        provider: 'github',
+        options: {
+          redirectTo: '/',
+        },
+      });
     },
     []
   );
