@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AuthIcon } from '@/src/components/Content/AuthIcon';
@@ -28,6 +28,8 @@ export function SignUpForm({ styles, }: Props) {
     mode: 'all',
   });
 
+  const checkRef = useRef<HTMLInputElement>(null);
+
   const onSubmitForm: SubmitHandler<Inputs> = useCallback(
     async (data) => {
       await supabase.auth.signUp({
@@ -39,6 +41,15 @@ export function SignUpForm({ styles, }: Props) {
     },
     []
   );
+
+  const onClickCheck = useCallback(
+    () => {
+
+    },
+    []
+  );
+
+  console.log(watch('isAgree'));
 
   const css = {
     default: twJoin([
@@ -63,6 +74,13 @@ export function SignUpForm({ styles, }: Props) {
     button: twJoin([
       `p-3 text-middle font-500 rounded-1 bg-black-600 text-white hover:bg-black-base transition-colors duration-200 mt-10`,
     ]),
+    check: twJoin([
+      `after:content-[''] after:block after:w-[20px] after:h-[20px] after:bg-white after:border-2 after:border-blue-500 after:rounded-1`,
+      watch('isAgree') && `after:bg-blue-500`,
+    ]),
+    required: twJoin([
+      `text-red-500 ml-1`,
+    ]),
   };
 
   return (
@@ -70,7 +88,10 @@ export function SignUpForm({ styles, }: Props) {
       <form onSubmit={handleSubmit(onSubmitForm)} className={css.default}>
         <div className={css.inputGroup}>
           <label htmlFor='email' className={css.inputBlock}>
-            <span className={css.label}>이메일</span>
+            <span className={css.label}>
+              이메일
+              <span className={css.required}>*</span>
+            </span>
             <input
               type='email'
               id='email'
@@ -93,7 +114,10 @@ export function SignUpForm({ styles, }: Props) {
         </div>
         <div className={css.inputGroup}>
           <label htmlFor='user-name' className={css.inputBlock}>
-            <span className={css.label}>닉네임</span>
+            <span className={css.label}>
+              닉네임
+              <span className={css.required}>*</span>
+            </span>
             <input
               type='text'
               id='user-name'
@@ -116,7 +140,10 @@ export function SignUpForm({ styles, }: Props) {
         </div>
         <div className={css.inputGroup}>
           <label htmlFor='password' className={css.inputBlock}>
-            <span className={css.label}>비밀번호</span>
+            <span className={css.label}>
+              비밀번호
+              <span className={css.required}>*</span>
+            </span>
             <input
               type='password'
               id='password'
@@ -140,7 +167,10 @@ export function SignUpForm({ styles, }: Props) {
         </div>
         <div className={css.inputGroup}>
           <label htmlFor='password-check' className={css.inputBlock}>
-            <span className={css.label}>비밀번호 확인</span>
+            <span className={css.label}>
+              비밀번호 확인
+              <span className={css.required}>*</span>
+            </span>
             <input
               type='password'
               id='password-check'
@@ -165,6 +195,31 @@ export function SignUpForm({ styles, }: Props) {
           </label>
           {errors.passwordCheck && (
             <span className={css.errorMessage}>{errors.passwordCheck.message}</span>
+          )}
+        </div>
+        <div className='flex flex-col gap-1'>
+          <label htmlFor='agree' className='flex flex-row gap-1 items-center'>
+            <input
+              type='checkbox'
+              name='agree'
+              id='agree'
+              hidden
+              ref={checkRef}
+              {...register('isAgree', {
+                required: {
+                  value: true,
+                  message: '이용약관에 동의하셔야 합니다.',
+                },
+              })}
+            />
+            <span onClick={onClickCheck} className={css.check} />
+            <span className='text-middle font-500'>
+              이용약관에 동의합니다.
+              <span className={css.required}>*</span>
+            </span>
+          </label>
+          {errors.isAgree && (
+            <span className={css.errorMessage}>{errors.isAgree.message}</span>
           )}
         </div>
         <button className={css.button}>회원가입</button>
