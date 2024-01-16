@@ -1,22 +1,25 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { RollDiceModResult } from '@nihilncunia/diceroll/dist/@types';
 
 interface CommonStoreState {
-  word: string;
+  diceResult: RollDiceModResult[][];
 }
 
-export const commonStore = create(
-  persist<CommonStoreState>(() => ({
-    word: 'JavaScript',
-  }), {
-    name: 'nihilapps/common',
-    skipHydration: true,
-    storage: createJSONStorage(() => localStorage),
+export const commonStore = create<CommonStoreState>(
+  () => ({
+    diceResult: [],
   })
 );
 
-export const setWord = (value: string) => {
+export const diceResultClear = () => {
   commonStore.setState({
-    word: value,
+    diceResult: [],
+  });
+};
+
+export const addDiceResult = (result: RollDiceModResult[]) => {
+  commonStore.setState({
+    diceResult: [ result, ...commonStore.getState().diceResult, ],
   });
 };

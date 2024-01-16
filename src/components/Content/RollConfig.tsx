@@ -1,14 +1,16 @@
 'use client';
 
 import React, {
+  ChangeEvent,
   MouseEvent, useCallback, useState
 } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { RollDiceResult } from '@nihilncunia/diceroll/dist/@types';
+import { RollDiceModResult, RollDiceResult } from '@nihilncunia/diceroll/dist/@types';
 import { useForm } from 'react-hook-form';
 import { rollAllDices } from '@nihilncunia/diceroll';
 import { diceData } from '@/src/data/dice.data';
 import { Nihil } from '@/src/utils/nihil';
+import { addDiceResult } from '@/src/store/common.store';
 
 interface Props {
   styles?: ClassNameValue;
@@ -21,7 +23,9 @@ interface Inputs {
 export function RollConfig({ styles, }: Props) {
   const [ type, setType, ] = useState('custom');
   const [ dice, setDice, ] = useState('');
+  const [ myDice, setMyDice, ] = useState('none');
   const [ rollType, setRollType, ] = useState('default');
+  const [ diceLogs, setDiceLogs, ] = useState<RollDiceModResult[][]>([]);
 
   const { register, watch, } = useForm<Inputs>();
 
@@ -46,12 +50,19 @@ export function RollConfig({ styles, }: Props) {
     []
   );
 
+  const onChangeMyDice = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setMyDice(event.target.value);
+    },
+    []
+  );
+
   const onClickRoll = useCallback(
     () => {
       if (type === 'custom') {
         const result = rollAllDices(watch('dice'));
 
-        console.log('주사위식', result);
+        addDiceResult(result);
       } else if (type === 'preset') {
         let presetDice: RollDiceResult;
 
@@ -61,12 +72,23 @@ export function RollConfig({ styles, }: Props) {
           }
         });
 
-        console.log('프리셋 주사위 굴리기 >> ', presetDice);
-      } else {
+        const result = [ {
+          diceDetails: [
+            presetDice,
+          ],
+          diceTotal: presetDice.total,
+          formula: presetDice.dice,
+          modDetails: [],
+        }, ] as RollDiceModResult[];
 
+        addDiceResult(result);
+      } else {
+        const result = rollAllDices(myDice);
+
+        addDiceResult(result);
       }
     },
-    [ diceData, dice, type, ]
+    [ diceData, dice, type, myDice, ]
   );
 
   const css = {
@@ -103,8 +125,9 @@ export function RollConfig({ styles, }: Props) {
           </select>
         )}
         {type === 'mydice' && (
-          <select>
-            {[].map((item) => (
+          <select onChange={onChangeMyDice} value={myDice}>
+            <option value='none'>선택하세요</option>
+            {[ '2D100*3', '3D6*6', ].map((item) => (
               <option key={Nihil.uuid(0)} value={item}>{item}</option>
             ))}
           </select>
