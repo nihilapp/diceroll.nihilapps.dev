@@ -1,16 +1,14 @@
 'use client';
 
 import React, {
-  ChangeEvent,
-  MouseEvent, useCallback, useState
+  ChangeEvent, KeyboardEvent,
+  useCallback, useState
 } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { RollDiceModResult, RollDiceResult } from '@nihilncunia/diceroll/dist/@types';
 import { useForm } from 'react-hook-form';
-import { rollAllDices } from '@nihilncunia/diceroll';
-import { diceData } from '@/src/data/dice.data';
+import { preset, rollAllDices } from '@nihilncunia/diceroll';
 import { Nihil } from '@/src/utils/nihil';
-import { addDiceResult } from '@/src/store/common.store';
+import { addDiceResult, commonStore, diceResultClear } from '@/src/store/common.store';
 
 interface Props {
   styles?: ClassNameValue;
@@ -22,30 +20,31 @@ interface Inputs {
 
 export function RollConfig({ styles, }: Props) {
   const [ type, setType, ] = useState('custom');
-  const [ dice, setDice, ] = useState('');
+  const [ dice, setDice, ] = useState('none');
   const [ myDice, setMyDice, ] = useState('none');
   const [ rollType, setRollType, ] = useState('default');
-  const [ diceLogs, setDiceLogs, ] = useState<RollDiceModResult[][]>([]);
 
   const { register, watch, } = useForm<Inputs>();
 
-  const onClickType = useCallback(
-    (event: MouseEvent<HTMLSelectElement>) => {
-      setType(event.currentTarget.value);
+  const { diceResult, } = commonStore();
+
+  const onChangeType = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setType(event.target.value);
     },
     []
   );
 
-  const onClickDice = useCallback(
-    (event: MouseEvent<HTMLSelectElement>) => {
-      setDice(event.currentTarget.value);
+  const onChangePreset = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setDice(event.target.value);
     },
     []
   );
 
-  const onClickRollType = useCallback(
-    (event: MouseEvent<HTMLSelectElement>) => {
-      setRollType(event.currentTarget.type);
+  const onChangeRollType = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setRollType(event.target.value);
     },
     []
   );
@@ -57,93 +56,144 @@ export function RollConfig({ styles, }: Props) {
     []
   );
 
+  const onClickReset = useCallback(
+    () => {
+      diceResultClear();
+    },
+    []
+  );
+
   const onClickRoll = useCallback(
     () => {
       if (type === 'custom') {
-        const result = rollAllDices(watch('dice'));
+        const result = rollAllDices(watch('dice', rollType));
 
         addDiceResult(result);
       } else if (type === 'preset') {
-        let presetDice: RollDiceResult;
+        if (dice === 'none') {
+          return;
+        }
 
-        diceData.forEach((item) => {
-          if (item.dice === dice) {
-            presetDice = item;
-          }
-        });
-
-        const result = [ {
-          diceDetails: [
-            presetDice,
-          ],
-          diceTotal: presetDice.total,
-          formula: presetDice.dice,
-          modDetails: [],
-        }, ] as RollDiceModResult[];
+        const result = rollAllDices(dice, rollType);
 
         addDiceResult(result);
       } else {
-        const result = rollAllDices(myDice);
+        if (myDice === 'none') {
+          return;
+        }
+
+        const result = rollAllDices(myDice, rollType);
 
         addDiceResult(result);
       }
     },
-    [ diceData, dice, type, myDice, ]
+    [ dice, type, myDice, rollType, ]
+  );
+
+  const onKeydownRoll = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.code === 'Enter' || event.key === 'Enter') {
+        onClickRoll();
+      }
+    },
+    []
   );
 
   const css = {
     default: twJoin([
-      ``,
+      `text-middle`,
       styles,
+    ]),
+    select: twJoin([
+      `p-3 bg-black-600 rounded-1 text-white flex-1 shrink-0 text-middle`,
+    ]),
+    button: twJoin([
+      `p-2 flex flex-row gap-1 items-center justify-center bg-black-600 text-white hover:bg-blue-500 rounded-1 flex-1 shrink-0 duration-200 transition-colors text-middle`,
+    ]),
+    input: twJoin([
+      `p-3 rounded-1 bg-black-400 text-white placeholder:text-white placeholder:text-opacity-40 text-middle w-full outline-none mb-5`,
+      type !== 'custom' && `!bg-black-200 text-black-500 placeholder:text-black-500 placeholder:text-opacity-30 opacity-0`,
     ]),
   };
 
   return (
     <>
       <div className={css.default}>
-        <select onClick={onClickType} defaultValue='custom'>
-          <option value='preset'>프리셋 주사위 세트</option>
-          <option value='custom'>주사위식</option>
-          <option value='mydice'>사용자 정의 세트</option>
-        </select>
+        <div className='flex flex-col mf-sm:flex-row mf-md:flex-row gap-1 mb-1'>
+          <select
+            onChange={onChangeType}
+            value={type}
+            className={css.select}
+          >
+            <option value='preset'>프리셋 주사위 세트</option>
+            <option value='custom'>주사위식</option>
+            <option value='mydice'>사용자 정의 세트</option>
+          </select>
+          <select
+            onChange={onChangeRollType}
+            value={rollType}
+            className={css.select}
+          >
+            <option value='default'>일반굴림</option>
+            <option value='min'>최소굴림</option>
+            <option value='max'>최대굴림</option>
+          </select>
+        </div>
+      </div>
+      <div>
         {type === 'preset' && (
-          <select onClick={onClickDice} defaultValue='D2'>
-            <option value='D2'>D2</option>
-            <option value='D4'>D4</option>
-            <option value='D6'>D6</option>
-            <option value='D8'>D8</option>
-            <option value='D10'>D10</option>
-            <option value='D12'>D12</option>
-            <option value='D20'>D20</option>
-            <option value='D100'>D100</option>
-            <option value='2D4'>2D4</option>
-            <option value='2D8'>2D8</option>
-            <option value='2D10'>2D10</option>
-            <option value='3D4'>3D4</option>
-            <option value='3D6'>3D6</option>
-            <option value='3D8'>3D8</option>
+          <select
+            onChange={onChangePreset}
+            value={dice}
+            className={twJoin(css.select, `w-full mb-5`)}
+          >
+            <option value='none'>선택하세요</option>
+            {preset.map((item) => (
+              <option key={Nihil.uuid(0)} value={item}>{item}</option>
+            ))}
           </select>
         )}
         {type === 'mydice' && (
-          <select onChange={onChangeMyDice} value={myDice}>
+          <select
+            onChange={onChangeMyDice}
+            value={myDice}
+            className={twJoin(css.select, `w-full mb-5`)}
+          >
             <option value='none'>선택하세요</option>
             {[ '2D100*3', '3D6*6', ].map((item) => (
               <option key={Nihil.uuid(0)} value={item}>{item}</option>
             ))}
           </select>
         )}
-        <select onClick={onClickRollType}>
-          <option value='default'>일반굴림</option>
-          <option value='min'>최소굴림</option>
-          <option value='max'>최대굴림</option>
-        </select>
+        {type === 'custom' && (
+          <input
+            type='text'
+            placeholder='주사위식을 입력하세요.'
+            onKeyDown={onKeydownRoll}
+            className={css.input}
+            {...register('dice')}
+          />
+        )}
       </div>
-      {type === 'custom' && (
-        <div>
-          <input type='text' placeholder='주사위식을 입력하세요.' {...register('dice')} />
-        </div>
-      )}
-      <button onClick={onClickRoll}>굴리기</button>
+      <div className='flex flex-row gap-1'>
+        <button
+          onClick={onClickReset}
+          disabled={diceResult.length === 0}
+          className={twJoin(
+            css.button,
+            `bg-red-400 hover:bg-red-500`,
+            diceResult.length === 0 && `!bg-black-200 text-black-400`
+          )}
+        >
+          초기화
+        </button>
+        <button
+          onClick={onClickRoll}
+          className={css.button}
+        >
+          굴리기
+        </button>
+      </div>
     </>
   );
 }

@@ -9,9 +9,9 @@ export const metadata = setMeta({
 
 export default function RollPage() {
   return (
-    <>
+    <div className='py-[50px] w-full px-2 mf-sm:w-full mf-md:w-full mf-lg:max-w-[1000px] mx-auto'>
       <RollConfig />
       <RollResultLog />
-    </>
+    </div>
   );
 }

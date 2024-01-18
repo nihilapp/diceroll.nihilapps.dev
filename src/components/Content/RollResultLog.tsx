@@ -12,8 +12,6 @@ interface Props {
 export function RollResultLog({ styles, }: Props) {
   const { diceResult, } = commonStore();
 
-  console.log(diceResult);
-
   const css = {
     default: twJoin([
       ``,
