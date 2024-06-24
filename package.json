@@ -1,5 +1,14 @@
 {
+  "name": "diceroll.nihilapps.dev",
+  "version": "0.0.1",
   "main": "index.js",
+  "repository": {
+    "url": "git+https://github.com/nihilapp/diceroll.nihilapps.dev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nihilapp/diceroll.nihilapps.dev/issues"
+  },
+  "homepage": "https://github.com/nihilapp/diceroll.nihilapps.dev#readme",
   "scripts": {
     "remove": "rm -rf node_modules/.cache && rm -rf build/",
     "serve": "yarn run remove && next dev",
