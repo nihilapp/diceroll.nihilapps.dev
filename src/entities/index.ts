@@ -5,7 +5,10 @@ export {
   type IConfigData,
   type ISiteMeta
 } from './common/common.types';
+
 export {
   commonStore,
-  setDarkMode
+  setDarkMode,
+  toggleSideOpen,
+  setSideOpen
 } from './common/common.store';

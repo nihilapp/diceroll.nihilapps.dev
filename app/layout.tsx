@@ -46,7 +46,7 @@ interface Props {
 export default function AppLayout({ children, }: Props) {
   const css = {
     default: twJoin([
-      `w-screen h-screen overflow-y-hidden overflow-x-hidden flex flex-col`,
+      `w-screen h-screen overflow-y-hidden overflow-x-hidden flex flex-col text-middle`,
     ]),
   };
 

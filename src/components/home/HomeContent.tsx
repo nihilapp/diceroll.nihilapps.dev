@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { Dice } from '@nihilapp/dice';
+import { Dice, RollResult } from '@nihilapp/dice';
 import { nihilTool } from '@nihilapp/tools';
 
 interface Props {
@@ -10,32 +10,23 @@ interface Props {
 }
 
 export function HomeContent({ className, }: Props) {
-  const d20 = useMemo(
-    () => {
-      return Dice.rollToFormula({
-        formula: 'd20',
-      });
-    },
-    []
-  );
+  const [ d201, setD201, ] = useState<RollResult[]>(null);
+  const [ d202, setD202, ] = useState<RollResult[]>(null);
+  const [ d203, setD203, ] = useState<RollResult[]>(null);
 
-  const d202 = useMemo(
-    () => {
-      return Dice.rollToFormula({
-        formula: 'd20',
-      });
-    },
-    []
-  );
+  useEffect(() => {
+    setD201(Dice.rollToFormula({
+      formula: 'd20',
+    }));
 
-  const d203 = useMemo(
-    () => {
-      return Dice.rollToFormula({
-        formula: 'd20',
-      });
-    },
-    []
-  );
+    setD202(Dice.rollToFormula({
+      formula: 'd20',
+    }));
+
+    setD203(Dice.rollToFormula({
+      formula: 'd20',
+    }));
+  }, []);
 
   const css = {
     default: twJoin([
@@ -46,7 +37,7 @@ export function HomeContent({ className, }: Props) {
 
   return (
     <>
-      <div className={css.default}>{nihilTool.common.string(d20)}</div>
+      <div className={css.default}>{nihilTool.common.string(d201)}</div>
       <div className={css.default}>{nihilTool.common.string(d202)}</div>
       <div className={css.default}>{nihilTool.common.string(d203)}</div>
     </>
