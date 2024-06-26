@@ -22,8 +22,8 @@ export function Nav({ className, }: Props) {
   return (
     <>
       <nav className={css.default}>
-        <Link href='/' className={css.link}>홈</Link>
-        <Link href='/' className={css.link}>홈</Link>
+        <Link href='/preset' className={css.link}>기본 주사위</Link>
+        <Link href='/custom' className={css.link}>커스텀 주사위</Link>
       </nav>
     </>
   );

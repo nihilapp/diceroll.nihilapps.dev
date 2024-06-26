@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const metadata = setMeta({
-  title: '기본주사위',
+  title: '기본 주사위',
   url: '/preset',
 });
 

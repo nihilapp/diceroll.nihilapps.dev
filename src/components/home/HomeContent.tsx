@@ -20,11 +20,11 @@ export function HomeContent({ className, }: Props) {
     }));
 
     setD202(Dice.rollToFormula({
-      formula: 'd20',
+      formula: '2d20',
     }));
 
     setD203(Dice.rollToFormula({
-      formula: 'd20',
+      formula: '4d20kl2',
     }));
   }, []);
 

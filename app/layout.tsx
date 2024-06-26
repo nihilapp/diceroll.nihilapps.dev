@@ -4,6 +4,7 @@ import '@/src/styles/tailwind.css';
 import '@/src/styles/shadcn.styles.css';
 import { twJoin } from 'tailwind-merge';
 import { configData } from '@/src/data';
+import { DefaultPage } from '@/src/widgets';
 
 export const metadata: Metadata = {
   metadataBase: new URL(configData.url),
@@ -51,9 +52,11 @@ export default function AppLayout({ children, }: Props) {
   };
 
   return (
-    <html lang='ko' suppressHydrationWarning>
-      <body suppressHydrationWarning className={css.default}>
-        {children}
+    <html lang='ko'>
+      <body className={css.default}>
+        <DefaultPage>
+          {children}
+        </DefaultPage>
       </body>
     </html>
   );
