@@ -10,7 +10,7 @@ export const metadata = setMeta({
   url: '/preset',
 });
 
-export default function PresetDicePage() {
+export default function page() {
   return (
     <>
       <div>content</div>

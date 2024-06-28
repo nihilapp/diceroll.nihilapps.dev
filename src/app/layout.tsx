@@ -28,10 +28,16 @@ export const metadata: Metadata = {
     url: configData.url,
     images: [
       {
-        url: '/opengraph-image.png',
+        url: `${configData.url}/opengraph-image.png`,
         width: 1920,
         height: 1080,
         alt: 'site image',
+      },
+      {
+        url: `${configData.url}/twitter-image.png`,
+        width: 1920,
+        height: 1080,
+        alt: 'twitter site image',
       },
     ],
   },

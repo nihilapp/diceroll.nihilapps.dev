@@ -25,7 +25,10 @@ export interface IConfigData {
   description: string;
   url: string;
   type: string;
-  image: string;
+  image: {
+    link: string;
+    alt: string;
+  };
   keywords: string;
   author: {
     name: string;

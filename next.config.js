@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
   distDir: 'build',
   reactStrictMode: false,
   // 정적 페이지의 결과물이 이 폴더에 생긴다.

@@ -11,7 +11,10 @@ export const configData: IConfigData = {
   type: 'website',
   url: process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : '',
-  image: '',
+    : 'https://diceroll.nihilapps.dev',
+  image: {
+    link: '/opengraph-image.png',
+    alt: 'site image',
+  },
   version: 'v0.0.0',
 };

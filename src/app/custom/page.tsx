@@ -10,7 +10,7 @@ export const metadata = setMeta({
   url: '/custom',
 });
 
-export default function CustomDicePage() {
+export default function page() {
   return (
     <>
       <div>content</div>

@@ -8,7 +8,7 @@ export const metadata: Metadata = setMeta({
   url: '/',
 });
 
-export default function IndexPage() {
+export default function page() {
   return (
     <HomeContent />
   );
