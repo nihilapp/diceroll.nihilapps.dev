@@ -14,18 +14,18 @@ export function Aside({ className, }: Props) {
 
   const css = {
     default: twJoin([
-      `p-2 hidden mo-sm:hidden mo-md:block`,
+      `p-2 hidden mo-sm:hidden mo-md:block pt-0`,
       className,
     ]),
     inside: twJoin([
-      `bg-green-500 w-[150px] rounded-2 p-2`,
+      `bg-white border border-black-200 shadow-md w-[200px] rounded-2 p-2 dark:bg-black-base`,
     ]),
     moSide: twJoin([
       `absolute z-10 -left-full transition-[left] duration-200 p-2`,
       sideOpen && `!left-0`,
     ]),
     menuTitle: twJoin([
-      `mb-2 text-center font-900 text-[140%]`,
+      `mb-2 font-900 text-[120%] ml-1 border-b-2 border-black-200 pb-2 leading-none mt-1`,
     ]),
   };
 

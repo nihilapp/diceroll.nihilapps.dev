@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
+import { PageLink } from '@/src/components';
 
 interface Props {
   className?: ClassNameValue
@@ -11,19 +12,16 @@ interface Props {
 export function Nav({ className, }: Props) {
   const css = {
     default: twJoin([
-      `flex flex-col gap-1`,
+      `flex flex-col gap-2`,
       className,
-    ]),
-    link: twJoin([
-      `p-1 bg-black-base text-white rounded-1 flex flex-row gap-1 items-center justify-center`,
     ]),
   };
 
   return (
     <>
       <nav className={css.default}>
-        <Link href='/preset' className={css.link}>기본 주사위</Link>
-        <Link href='/custom' className={css.link}>커스텀 주사위</Link>
+        <PageLink link='/preset' icon='iconoir:hexagon-dice'>기본 주사위</PageLink>
+        <PageLink link='/custom' icon='iconoir:hexagon-dice'>커스텀 주사위</PageLink>
       </nav>
     </>
   );

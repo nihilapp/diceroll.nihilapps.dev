@@ -53,7 +53,7 @@ interface Props {
 export default function AppLayout({ children, }: Props) {
   const css = {
     default: twJoin([
-      `w-screen h-screen overflow-y-hidden overflow-x-hidden flex flex-col text-middle`,
+      `h-screen overflow-y-hidden overflow-x-hidden flex flex-col text-middle bg-black-100 w-full mo-sm:w-full mo-md:max-w-[900px] mo-lg:w-[900px] mx-auto font-500`,
     ]),
   };
 

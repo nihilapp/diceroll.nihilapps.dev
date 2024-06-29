@@ -35,10 +35,10 @@ export function ToggleDarkMode({ className, }: Props) {
       className,
     ]),
     dark: twJoin([
-      `p-2 rounded-1 border border-black-500`,
+      `p-2 rounded-1 border border-black-500 absolute top-1/2 -translate-y-1/2 right-2`,
     ]),
     light: twJoin([
-      `p-2 rounded-1 border border-black-200`,
+      `p-2 rounded-1 border border-black-200  absolute top-1/2 -translate-y-1/2 right-2`,
     ]),
     icon: twJoin([
       `text-blue-500 dark:text-yellow-500 text-2xl`,

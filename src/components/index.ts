@@ -1,4 +1,5 @@
 export { ToggleDarkMode } from './common/ToggleDarkMode';
+export { PageLink } from './common/PageLink';
 
 export { Header } from './layouts/Header';
 export { Nav } from './layouts/Nav';
