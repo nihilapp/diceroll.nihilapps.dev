@@ -15,7 +15,7 @@ export const commonStore = create(
       sideOpen: false,
     }),
     {
-      name: 'project/common-state',
+      name: 'diceroll/common-state',
       skipHydration: true,
       storage: createJSONStorage(() => localStorage),
     }

@@ -12,3 +12,8 @@ export {
   toggleSideOpen,
   setSideOpen
 } from './common/common.store';
+
+export {
+  presetStore,
+  setFormulaString
+} from './preset/preset.store';

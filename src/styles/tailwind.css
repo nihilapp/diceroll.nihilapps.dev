@@ -7,4 +7,14 @@
   * {
     @apply p-0 m-0 box-border font-sans
   }
+
+  strong {
+    @apply font-900
+  }
+}
+
+@layer components {
+  .white-block {
+    @apply bg-white dark:bg-black-base text-black-base dark:text-black-50 p-2 rounded-2 shadow-md border border-black-200 font-500
+  }
 }

@@ -20,6 +20,7 @@ export function Nav({ className, }: Props) {
   return (
     <>
       <nav className={css.default}>
+        <PageLink link='/' icon='mdi:home'>설명서</PageLink>
         <PageLink link='/preset' icon='iconoir:hexagon-dice'>기본 주사위</PageLink>
         <PageLink link='/custom' icon='iconoir:hexagon-dice'>커스텀 주사위</PageLink>
       </nav>

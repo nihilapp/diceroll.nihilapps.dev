@@ -19,7 +19,7 @@ export function AppMain({ className, children, }: Props) {
 
   const css = {
     default: twJoin([
-      `bg-black-base text-white flex-1 shrink-0 p-2 relative`,
+      `flex-1 shrink-0 p-2 relative pt-0 text-black-base overflow-y-auto`,
       className,
     ]),
   };

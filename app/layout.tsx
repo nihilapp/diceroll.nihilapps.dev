@@ -1,10 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
 import '@/src/styles/tailwind.css';
-import '@/src/styles/shadcn.styles.css';
 import { twJoin } from 'tailwind-merge';
+import Script from 'next/script';
 import { configData } from '@/src/data';
-import { DefaultPage } from '@/src/widgets';
 
 export const metadata: Metadata = {
   metadataBase: new URL(configData.url),
@@ -53,16 +52,21 @@ interface Props {
 export default function AppLayout({ children, }: Props) {
   const css = {
     default: twJoin([
-      `h-screen overflow-y-hidden overflow-x-hidden flex flex-col text-middle bg-black-100 w-full mo-sm:w-full mo-md:max-w-[900px] mo-lg:w-[900px] mx-auto font-500`,
+      `h-screen overflow-y-hidden overflow-x-hidden flex flex-col text-middle bg-black-100 w-full mo-sm:w-full mo-md:max-w-[1000px] mo-lg:w-[1000px] mx-auto font-500`,
     ]),
   };
 
   return (
     <html lang='ko'>
+      <head>
+        <Script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9256396675875954'
+          crossOrigin='anonymous'
+        />
+      </head>
       <body className={css.default}>
-        <DefaultPage>
-          {children}
-        </DefaultPage>
+        {children}
       </body>
     </html>
   );

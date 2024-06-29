@@ -3,7 +3,7 @@
 import React from 'react';
 import { enableCache } from '@iconify/react';
 import {
-  AppMain, Aside, Footer, Header
+  AppMain, Aside, Footer, GoogleAD, Header
 } from '@/src/components';
 
 enableCache('local');
@@ -17,11 +17,15 @@ export function DefaultPage({ children, }: Props) {
     <>
       <Header />
 
-      <div className='flex flex-row flex-1 shrink-0 gap-2'>
+      <div className='flex flex-row flex-1 shrink-0 gap-2 overflow-y-auto'>
         <Aside />
 
         <AppMain>
-          {children}
+          <GoogleAD />
+
+          <div className='white-block p-4'>
+            {children}
+          </div>
         </AppMain>
       </div>
 

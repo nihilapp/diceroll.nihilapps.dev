@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { Nav } from '@/src/components';
+import { GoogleAD, Nav } from '@/src/components';
 import { commonStore } from '@/src/entities';
 
 interface Props {
@@ -14,18 +14,18 @@ export function Aside({ className, }: Props) {
 
   const css = {
     default: twJoin([
-      `p-2 hidden mo-sm:hidden mo-md:block pt-0`,
+      `p-2 hidden mo-sm:hidden mo-md:block pt-0 text-black-base`,
       className,
     ]),
     inside: twJoin([
-      `bg-white border border-black-200 shadow-md w-[200px] rounded-2 p-2 dark:bg-black-base`,
+      `w-[300px] white-block`,
     ]),
     moSide: twJoin([
-      `absolute z-10 -left-full transition-[left] duration-200 p-2`,
+      `absolute z-10 -left-full transition-[left] duration-200 p-2 pt-0`,
       sideOpen && `!left-0`,
     ]),
     menuTitle: twJoin([
-      `mb-2 font-900 text-[120%] ml-1 border-b-2 border-black-200 pb-2 leading-none mt-1`,
+      `mb-4 font-900 text-[120%] ml-1 border-b-2 border-black-200 pb-4 leading-none mt-1`,
     ]),
   };
 
@@ -37,6 +37,8 @@ export function Aside({ className, }: Props) {
 
           <Nav />
         </div>
+
+        <GoogleAD isSide />
       </aside>
 
       <aside className={css.moSide}>

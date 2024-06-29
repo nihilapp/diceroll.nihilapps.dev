@@ -16,5 +16,5 @@ export const configData: IConfigData = {
     link: '/opengraph-image.png',
     alt: 'site image',
   },
-  version: 'v0.0.0',
+  version: 'v6.0.0',
 };

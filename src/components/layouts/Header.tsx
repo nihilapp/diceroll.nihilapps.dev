@@ -22,11 +22,11 @@ export function Header({ className, }: Props) {
 
   const css = {
     default: twJoin([
-      `p-2 h-[60px] flex items-center justify-center rounded-2 box-content mb-2 select-none`,
+      `p-2 h-[60px] flex items-center justify-center rounded-2 box-content mb-2 select-none text-black-base`,
       className,
     ]),
     header: twJoin([
-      `p-2 bg-white w-full relative flex flex-row items-center justify-center rounded-2 border border-black-200 shadow-md dark:bg-black-base`,
+      `w-full relative flex flex-row items-center justify-center white-block`,
     ]),
     button: twJoin([
       `flex flex-col absolute text-black-base dark:text-white mo-sm:flex mo-md:hidden z-[1] transition-colors duration-200 left-2 top-[30px] -translate-y-1/2 text-[150%] cursor-pointer`,
