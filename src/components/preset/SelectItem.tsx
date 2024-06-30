@@ -10,10 +10,6 @@ interface Props {
 }
 
 export function SelectItem({ className, formula, }: Props) {
-  const { formulaString, } = presetStore();
-
-  console.log('formulaString >> ', formulaString);
-
   const onClickRoll = useCallback(
     (formula: string) => {
       setFormulaString(formula);
