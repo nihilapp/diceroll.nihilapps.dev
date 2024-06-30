@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import { Dice } from '@nihilapp/dice';
 import { nihilTool } from '@nihilapp/tools';
+import { Icon } from '@iconify/react';
 import { SelectItem } from '@/src/components';
 import { presetStore } from '@/src/entities';
 
@@ -17,12 +18,22 @@ export function SelectFormula({ className, }: Props) {
 
   console.log('formulaString >> ', formulaString);
 
+  const onClickOpen = useCallback(
+    () => {
+      setIsOpen((prev) => !prev);
+    },
+    []
+  );
+
   const css = {
     selector: twJoin([
-      `flex flex-row`,
+      `flex flex-row items-stretch border-2 border-black-400 rounded-2 p-1 select-none`,
     ]),
     selectorVision: twJoin([
-      ``,
+      `p-1 flex-1 shrink-0 text-center bg-red-500`,
+    ]),
+    button: twJoin([
+      `p-1 bg-black-200 flex items-center justify-center text-[140%]`,
     ]),
     list: twJoin([
       ``,
@@ -31,13 +42,13 @@ export function SelectFormula({ className, }: Props) {
 
   return (
     <>
-      <div className={css.selector}>
+      <div className={css.selector} onClick={onClickOpen}>
         <div className={css.selectorVision}>{formulaString}</div>
-        <div className=''>
+        <div className={css.button}>
           {isOpen ? (
-            '열림'
+            <Icon icon='raphael:arrowdown' />
           ) : (
-            '닫힘'
+            <Icon icon='raphael:arrowup' />
           )}
         </div>
       </div>
