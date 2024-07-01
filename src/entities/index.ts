@@ -14,6 +14,8 @@ export {
 } from './common/common.store';
 
 export {
-  presetStore,
-  setFormulaString
-} from './preset/preset.store';
+  diceStore,
+  setFormulaString,
+  addRollResult,
+  resetRollResult
+} from './dice/dice.store';

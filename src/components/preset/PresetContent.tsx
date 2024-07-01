@@ -1,26 +1,36 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { Dice } from '@nihilapp/dice';
-import { nihilTool } from '@nihilapp/tools';
-import { SelectFormula } from '@/src/components';
+import { RollButton, SelectFormula } from '@/src/components';
+import { setFormulaString } from '@/src/entities';
 
 interface Props {
   className?: ClassNameValue;
 }
 
 export function PresetContent({ className, }: Props) {
+  useEffect(() => {
+    setFormulaString('D2');
+  }, []);
+
   const css = {
     default: twJoin([
       ``,
       className,
     ]),
+    button: twJoin([
+      ``,
+    ]),
   };
 
   return (
     <>
-      <SelectFormula />
+      <div>
+        <SelectFormula />
+        <RollButton />
+      </div>
+
     </>
   );
 }
