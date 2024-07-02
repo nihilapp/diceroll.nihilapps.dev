@@ -30,7 +30,7 @@ export function SelectItem({ className, formula, setIsOpen, }: Props) {
     <>
       <div className={css.default}>
         <div
-          className='h-[30px] bg-black-100 hover:bg-black-200 flex items-center justify-center rounded-2'
+          className='h-[30px] bg-black-200 hover:bg-black-300 dark:bg-black-600 dark:hover:bg-red-500 flex items-center justify-center rounded-2'
           onClick={() => onClickRoll(formula)}
         >
           {formula}

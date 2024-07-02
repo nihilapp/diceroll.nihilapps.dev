@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { RollButton, SelectFormula } from '@/src/components';
+import { ResetButton, RollButton, SelectFormula } from '@/src/components';
 import { setFormulaString } from '@/src/entities';
 
 interface Props {
@@ -26,9 +26,10 @@ export function PresetContent({ className, }: Props) {
 
   return (
     <>
-      <div>
+      <div className='flex flex-row gap-1'>
         <SelectFormula />
         <RollButton />
+        <ResetButton />
       </div>
 
     </>

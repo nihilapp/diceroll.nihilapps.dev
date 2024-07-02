@@ -4,6 +4,7 @@ export { P } from './common/P';
 export { Formula } from './common/Formula';
 export { GoogleAD } from './common/GoogleAD';
 export { RollButton } from './common/RollButton';
+export { ResetButton } from './common/ResetButton';
 
 export { Header } from './layouts/Header';
 export { Nav } from './layouts/Nav';
