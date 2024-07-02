@@ -2,7 +2,9 @@
 
 import React, { useEffect } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { ResetButton, RollButton, SelectFormula } from '@/src/components';
+import {
+  ResetButton, ResultList, RollButton, SelectFormula
+} from '@/src/components';
 import { setFormulaString } from '@/src/entities';
 
 interface Props {
@@ -32,6 +34,7 @@ export function PresetContent({ className, }: Props) {
         <ResetButton />
       </div>
 
+      <ResultList />
     </>
   );
 }

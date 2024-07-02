@@ -5,6 +5,8 @@ export { Formula } from './common/Formula';
 export { GoogleAD } from './common/GoogleAD';
 export { RollButton } from './common/RollButton';
 export { ResetButton } from './common/ResetButton';
+export { ResultList } from './common/ResultList';
+export { ResultListItem } from './common/ResultListItem';
 
 export { Header } from './layouts/Header';
 export { Nav } from './layouts/Nav';
