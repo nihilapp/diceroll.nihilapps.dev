@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 
 interface Props {
@@ -40,27 +40,23 @@ export function GoogleAD({ className, isSide, }: Props) {
   const css = {
     default: twJoin([
       ``,
-      isSide && `!mt-5`,
-      !isSide && `!mb-4 !h-[150px]`,
       className,
     ]),
     isSide: twJoin([
-      `adsbygoogle inline-block w-[300px] h-[320px]`,
+      `adsbygoogle !mt-5 inline-block w-[300px] h-[320px]`,
     ]),
     top: twJoin([
-      `adsbygoogle block w-full h-[150px]`,
+      `adsbygoogle !mb-4 block w-full h-[150px]`,
     ]),
   };
 
   return (
     <>
-      <div className={css.default}>
-        <ins
-          className={isSide ? css.isSide : css.top}
-          data-ad-client='ca-pub-9256396675875954'
-          data-ad-slot={isSide ? '7396456205' : '1486272521'}
-        />
-      </div>
+      <ins
+        className={isSide ? css.isSide : css.top}
+        data-ad-client='ca-pub-9256396675875954'
+        data-ad-slot={isSide ? '7396456205' : '1486272521'}
+      />
     </>
   );
 }

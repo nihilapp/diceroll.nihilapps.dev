@@ -11,10 +11,10 @@ export function ResultList() {
 
   const css = {
     default: twJoin([
-      `mt-20 pt-20 border-t-[10px] border-dotted border-black-200 text-black-base dark:text-white`,
+      `mt-20 pt-20 border-t-[10px] border-dotted border-black-200 text-black-base dark:text-white text-middle`,
     ]),
     noneItems: twJoin([
-      `mt-20 pt-20 border-t-[10px] border-dotted border-black-200 text-black-base dark:text-black-50`,
+      `mt-20 pt-20 border-t-[10px] border-dotted border-black-200 text-black-base dark:text-black-50 text-middle`,
     ]),
   };
 

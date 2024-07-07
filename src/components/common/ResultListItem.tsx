@@ -5,6 +5,7 @@ import { ClassNameValue, twJoin } from 'tailwind-merge';
 import { RollResult } from '@nihilapp/dice';
 import { nihilTool } from '@nihilapp/tools';
 import { Icon } from '@iconify/react';
+import { DiceResultItem } from '@/src/components';
 
 interface Props {
   className?: ClassNameValue;
@@ -25,21 +26,21 @@ export function ResultListItem({ className, resultItem, }: Props) {
 
   return (
     <>
+      {nihilTool.common.string(resultItem)}
       <div className={css.default}>
-        {nihilTool.common.string(resultItem)}
+        <div className='flex text-[140%] font-900'>
+          <div className='inline-flex flex-row gap-1 items-center bg-black-500 pl-2 pr-1 rounded-l-2 text-white'>
+            <Icon icon='iconoir:hexagon-dice' />
+            <span>{formula}</span>
+            <Icon icon='bxs:chevrons-right' className='mt-[2px]' />
+          </div>
+          <div className='pl-1 pr-2 rounded-r-2 bg-black-600 text-white'>{total}</div>
+        </div>
 
         <div>
-          <div className='text-[150%] font-900 flex flex-col gap-1 bg-black-500 text-white p-1 rounded-t-2 border-2 border-black-500 dark:border-black-400'>
-            <div className='flex flex-row gap-2 items-center'>
-              <Icon icon='iconoir:hexagon-dice' />
-              <span>{formula}</span>
-            </div>
-            <div className='flex flex-row gap-2 items-center'>
-              <Icon icon='bxs:chevrons-right' />
-              <span>{total}</span>
-            </div>
-          </div>
-          <div className='text-[130%] font-900 p-1 text-center border-2 border-t-0 border-black-500 dark:border-black-400 bg-black-500' />
+          {dices.map((dice) => (
+            <DiceResultItem key={nihilTool.common.uuid()} dice={dice} />
+          ))}
         </div>
       </div>
     </>
