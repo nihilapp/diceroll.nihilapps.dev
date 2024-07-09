@@ -20,7 +20,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
     "@iconify/react": "^5.0.1",
-    "@nihilapp/dice": "^0.0.16",
+    "@nihilapp/dice": "^0.0.19",
     "@nihilapp/tools": "^0.0.3",
     "@tanstack/react-query": "^5.48.0",
     "@tanstack/react-query-devtools": "^5.48.0",

@@ -14,6 +14,10 @@ export function RollButton({ className, }: Props) {
 
   const onClickRoll = useCallback(
     () => {
+      if (!formulaString) {
+        return;
+      }
+
       const result = Dice.rollToFormula({
         formula: formulaString,
       });

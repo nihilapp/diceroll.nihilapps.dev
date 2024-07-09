@@ -21,3 +21,6 @@ export { HomeContent } from './home/HomeContent';
 export { PresetContent } from './preset/PresetContent';
 export { SelectFormula } from './preset/SelectFormula';
 export { SelectItem } from './preset/SelectItem';
+
+export { CustomContent } from './custom/CustomContent';
+export { InputFormula } from './custom/InputFormula';

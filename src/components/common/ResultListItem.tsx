@@ -19,25 +19,34 @@ export function ResultListItem({ className, resultItem, }: Props) {
 
   const css = {
     default: twJoin([
-      ``,
+      `p-2 border-2 border-black-400 rounded-2 border-b-2`,
       className,
+    ]),
+    total: twJoin([
+      `inline-flex flex-row items-center font-900 px-2 rounded-1 bg-black-500 text-black-50 gap-1 border-2 border-black-400`,
+    ]),
+    formulaBox: twJoin([
+      `border-b-2 border-black-200 pb-2 mb-2`,
+    ]),
+    formula: twJoin([
+      `flex flex-row items-center text-[140%] font-900 mb-1 gap-1`,
     ]),
   };
 
   return (
     <>
-      {nihilTool.common.string(resultItem)}
       <div className={css.default}>
-        <div className='flex text-[140%] font-900'>
-          <div className='inline-flex flex-row gap-1 items-center bg-black-500 pl-2 pr-1 rounded-l-2 text-white'>
-            <Icon icon='iconoir:hexagon-dice' />
+        <div className={css.formulaBox}>
+          <div className={css.formula}>
+            <Icon icon='iconoir:hexagon-dice' className='mt-[2px]' />
             <span>{formula}</span>
-            <Icon icon='bxs:chevrons-right' className='mt-[2px]' />
           </div>
-          <div className='pl-1 pr-2 rounded-r-2 bg-black-600 text-white'>{total}</div>
+          <div className='text-[140%] flex flex-row items-center gap-2 font-900'>
+            <span className={css.total}>{total}</span>
+          </div>
         </div>
 
-        <div>
+        <div className='flex flex-col gap-1'>
           {dices.map((dice) => (
             <DiceResultItem key={nihilTool.common.uuid()} dice={dice} />
           ))}

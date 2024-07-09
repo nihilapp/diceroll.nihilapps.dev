@@ -1,5 +1,6 @@
 import React from 'react';
 import { setMeta } from '@/src/utils';
+import { CustomContent } from '@/src/components';
 
 interface Props {
   //
@@ -13,7 +14,7 @@ export const metadata = setMeta({
 export default function page() {
   return (
     <>
-      <div>content</div>
+      <CustomContent />
     </>
   );
 }
