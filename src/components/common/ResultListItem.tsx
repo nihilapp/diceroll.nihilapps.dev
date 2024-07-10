@@ -13,45 +13,46 @@ interface Props {
 }
 
 export function ResultListItem({ className, resultItem, }: Props) {
-  const {
-    formula, total, dices, mod,
-  } = resultItem[0];
-
   const css = {
-    default: twJoin([
-      `p-2 border-2 border-black-400 rounded-2 border-b-2`,
-      className,
+    listItem: twJoin([
+      `rounded-2 flex flex-col bg-black-500`,
     ]),
-    total: twJoin([
-      `inline-flex flex-row items-center font-900 px-2 rounded-1 bg-black-500 text-black-50 gap-1 border-2 border-black-400`,
-    ]),
-    formulaBox: twJoin([
-      `border-b-2 border-black-200 pb-2 mb-2`,
+    diceOne: twJoin([
+      `bg-black-500 rounded-2 p-4 pt-0 pb-0 border-2 border-black-500 text-black-50`,
     ]),
     formula: twJoin([
-      `flex flex-row items-center text-[140%] font-900 mb-1 gap-1`,
+      `flex flex-row gap-1 items-center text-[140%] font-900`,
+    ]),
+    total: twJoin([
+      `inline-flex flex-row gap-1 items-center text-[140%] font-900 px-2 bg-black-800 rounded-2 mt-1`,
+    ]),
+    diceList: twJoin([
+      `m-4`,
     ]),
   };
 
   return (
-    <>
-      <div className={css.default}>
-        <div className={css.formulaBox}>
-          <div className={css.formula}>
-            <Icon icon='iconoir:hexagon-dice' className='mt-[2px]' />
-            <span>{formula}</span>
+    <div className={css.listItem}>
+      {resultItem.map((item) => (
+        <div key={nihilTool.common.uuid()} className='first:pt-4'>
+          <div className={css.diceOne}>
+            <div className={css.formula}>
+              <Icon icon='iconoir:hexagon-dice' className='mt-[2px]' />
+              <span>{item.formula}</span>
+            </div>
+            <div className={css.total}>
+              <Icon icon='fa:arrow-right' className='mt-[2px]' />
+              <span>{item.total}</span>
+            </div>
           </div>
-          <div className='text-[140%] flex flex-row items-center gap-2 font-900'>
-            <span className={css.total}>{total}</span>
-          </div>
-        </div>
 
-        <div className='flex flex-col gap-1'>
-          {dices.map((dice) => (
-            <DiceResultItem key={nihilTool.common.uuid()} dice={dice} />
-          ))}
+          <div className={css.diceList}>
+            {item.dices.map((dice) => (
+              <DiceResultItem key={nihilTool.common.uuid()} dice={dice} />
+            ))}
+          </div>
         </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }

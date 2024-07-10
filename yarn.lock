@@ -1219,10 +1219,10 @@
   resolved "https://registry.yarnpkg.com/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-14.2.4.tgz#e65a1c6539a671f97bb86d5183d6e3a1733c29c7"
   integrity sha512-tkLrjBzqFTP8DVrAAQmZelEahfR9OxWpFR++vAI9FBhCiIxtwHwBHC23SBHCTURBtwB4kc/x44imVOnkKGNVGg==
 
-"@nihilapp/dice@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@nihilapp/dice/-/dice-0.0.19.tgz#bb959a4937aab4a2810e301acff61da292850dfa"
-  integrity sha512-K6EQA+EVqM68W4pY9XI0gn+fbiJ+haakrO+VgFm0X3AIfZBcJIYPkBKDJL8KU89BbkEGn60lRapIaM6GI9fPNw==
+"@nihilapp/dice@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@nihilapp/dice/-/dice-0.1.2.tgz#4ccdff6fd5f4fae2b45f33565f85f5e11506702e"
+  integrity sha512-xroIdKcn+G8G+LVfynxOYNAcInW4Zok/nkwzJMX672P5MyCfXvS6DbOAYFMSmR69/BcEXuHNKxN9Vvz/gQekCg==
 
 "@nihilapp/tools@^0.0.3":
   version "0.0.3"
