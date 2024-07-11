@@ -1,24 +1,18 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
 import { RollResult } from '@nihilapp/dice';
 
-type PresetState = {
+type DiceState = {
   formulaString: string;
+  rollType: ('default' | 'min' | 'max');
   rollResults: RollResult[][];
 };
 
-export const diceStore = create(
-  persist<PresetState>(
-    () => ({
-      formulaString: '',
-      rollResults: [],
-    }),
-    {
-      name: 'diceroll/dice-state',
-      skipHydration: true,
-      storage: createJSONStorage(() => localStorage),
-    }
-  )
+export const diceStore = create<DiceState>(
+  () => ({
+    formulaString: '',
+    rollType: 'default',
+    rollResults: [],
+  })
 );
 
 export function setFormulaString(value: string) {
@@ -38,5 +32,11 @@ export function addRollResult(value: RollResult[]) {
 export function resetRollResult() {
   diceStore.setState({
     rollResults: [],
+  });
+}
+
+export function setRollType(value: ('default' | 'min' | 'max')) {
+  diceStore.setState({
+    rollType: value,
   });
 }

@@ -1,30 +1,29 @@
 'use client';
 
 import React from 'react';
-import { ClassNameValue, twJoin } from 'tailwind-merge';
+import { twJoin } from 'tailwind-merge';
 import { RollResult } from '@nihilapp/dice';
 import { nihilTool } from '@nihilapp/tools';
 import { Icon } from '@iconify/react';
 import { DiceResultItem } from '@/src/components';
 
 interface Props {
-  className?: ClassNameValue;
   resultItem: RollResult[];
 }
 
-export function ResultListItem({ className, resultItem, }: Props) {
+export function ResultListItem({ resultItem, }: Props) {
   const css = {
     listItem: twJoin([
-      `rounded-2 flex flex-col bg-black-500`,
+      `rounded-2 flex flex-col first:bg-black-500 bg-black-300 first:text-black-50 text-black-base`,
     ]),
     diceOne: twJoin([
-      `bg-black-500 rounded-2 p-4 pt-0 pb-0 border-2 border-black-500 text-black-50`,
+      `rounded-2 p-4 pt-0 pb-0`,
     ]),
     formula: twJoin([
       `flex flex-row gap-1 items-center text-[140%] font-900`,
     ]),
     total: twJoin([
-      `inline-flex flex-row gap-1 items-center text-[140%] font-900 px-2 bg-black-800 rounded-2 mt-1`,
+      `inline-flex flex-row gap-1 items-center text-[140%] font-900 px-2 bg-black-800 rounded-2 mt-1 text-black-50`,
     ]),
     diceList: twJoin([
       `m-4`,
@@ -48,7 +47,7 @@ export function ResultListItem({ className, resultItem, }: Props) {
 
           <div className={css.diceList}>
             {item.dices.map((dice) => (
-              <DiceResultItem key={nihilTool.common.uuid()} dice={dice} />
+              <DiceResultItem key={nihilTool.common.uuid()} dice={dice} mod={item.mod} />
             ))}
           </div>
         </div>

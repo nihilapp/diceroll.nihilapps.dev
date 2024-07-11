@@ -17,5 +17,6 @@ export {
   diceStore,
   setFormulaString,
   addRollResult,
-  resetRollResult
+  resetRollResult,
+  setRollType
 } from './dice/dice.store';

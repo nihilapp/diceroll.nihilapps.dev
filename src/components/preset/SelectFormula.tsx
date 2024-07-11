@@ -16,8 +16,6 @@ export function SelectFormula({ className, }: Props) {
   const [ isOpen, setIsOpen, ] = useState(false);
   const { formulaString, } = diceStore();
 
-  console.log('formulaString >> ', formulaString);
-
   const onClickOpen = useCallback(
     () => {
       setIsOpen((prev) => !prev);

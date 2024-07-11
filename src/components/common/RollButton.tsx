@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function RollButton({ className, }: Props) {
-  const { formulaString, } = diceStore();
+  const { formulaString, rollType, } = diceStore();
 
   const onClickRoll = useCallback(
     () => {
@@ -20,11 +20,12 @@ export function RollButton({ className, }: Props) {
 
       const result = Dice.rollToFormula({
         formula: formulaString,
+        mode: rollType,
       });
 
       addRollResult(result);
     },
-    [ formulaString, ]
+    [ formulaString, rollType, ]
   );
 
   const css = {

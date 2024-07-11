@@ -3,29 +3,39 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import { usePathname } from 'next/navigation';
+import { nihilTool } from '@nihilapp/tools';
+import { Icon } from '@iconify/react';
 import {
   InputFormula,
   ResetButton, ResultList, RollButton
 } from '@/src/components';
-import { resetRollResult, setFormulaString } from '@/src/entities';
+import {
+  diceStore, resetRollResult, setFormulaString, setRollType
+} from '@/src/entities';
 
 interface Props {
   className?: ClassNameValue;
 }
 
+const radioData = [
+  { value: 'default', label: '일반굴림', },
+  { value: 'min', label: '최소굴림', },
+  { value: 'max', label: '최대굴림', },
+];
+
 export function CustomContent({ className, }: Props) {
-  const [ rollType, setRollType, ] = useState('default');
+  const { rollType, } = diceStore();
   const pathname = usePathname();
 
   useEffect(() => {
     setFormulaString('');
     resetRollResult();
+    setRollType('default');
   }, [ pathname, ]);
 
   const onChangeRadio = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(event.target);
-      setRollType(event.target.id);
+      setRollType(event.target.id as ('default' | 'min' | 'max'));
     },
     []
   );
@@ -35,6 +45,9 @@ export function CustomContent({ className, }: Props) {
       ``,
       className,
     ]),
+    radio: twJoin([
+      `flex flex-row gap-1 items-center`,
+    ]),
   };
 
   return (
@@ -43,42 +56,29 @@ export function CustomContent({ className, }: Props) {
         <InputFormula />
         <div className='flex flex-row gap-1 items-stretch'>
           <div className='flex-1 shrink-0 flex flex-row gap-2 items-center'>
-            <label htmlFor='default'>
-              <input
-                type='radio'
-                checked={rollType === 'default'}
-                id='default'
-                name='rollType'
-                value={rollType}
-                onChange={onChangeRadio}
-                className='mr-1'
-              />
-              기본
-            </label>
-            <label htmlFor='min'>
-              <input
-                type='radio'
-                id='min'
-                checked={rollType === 'min'}
-                name='rollType'
-                value={rollType}
-                onChange={onChangeRadio}
-                className='mr-1'
-              />
-              최소굴림
-            </label>
-            <label htmlFor='max'>
-              <input
-                type='radio'
-                id='max'
-                checked={rollType === 'max'}
-                name='rollType'
-                value={rollType}
-                onChange={onChangeRadio}
-                className='mr-1'
-              />
-              최대굴림
-            </label>
+            {radioData.map((radio) => (
+              <label
+                key={nihilTool.common.uuid()}
+                htmlFor={radio.value}
+                className={css.radio}
+              >
+                <input
+                  type='radio'
+                  checked={rollType === radio.value}
+                  id={radio.value}
+                  name='rollType'
+                  value={rollType}
+                  onChange={onChangeRadio}
+                  className='mr-1 hidden'
+                />
+                {rollType === radio.value ? (
+                  <Icon icon='mdi:radio-button-checked' fontSize='120%' />
+                ) : (
+                  <Icon icon='mdi:radio-button-unchecked' fontSize='120%' />
+                )}
+                <span>{radio.label}</span>
+              </label>
+            ))}
           </div>
           <RollButton />
           <ResetButton />

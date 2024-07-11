@@ -2,7 +2,7 @@
 
 import React, { useCallback } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { resetRollResult } from '@/src/entities';
+import { resetRollResult, setFormulaString } from '@/src/entities';
 
 interface Props {
   className?: ClassNameValue;
@@ -12,6 +12,7 @@ export function ResetButton({ className, }: Props) {
   const onClickReset = useCallback(
     () => {
       resetRollResult();
+      setFormulaString('');
     },
     []
   );
