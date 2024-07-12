@@ -1,5 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import '@/src/styles/tailwind.css';
 import { twJoin } from 'tailwind-merge';
 import Script from 'next/script';
@@ -64,6 +65,7 @@ export default function AppLayout({ children, }: Props) {
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9256396675875954'
           crossOrigin='anonymous'
         />
+        <GoogleAnalytics gaId='G-ZH8LXK0D96' />
       </head>
       <body className={css.default}>
         {children}
