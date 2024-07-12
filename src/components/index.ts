@@ -8,6 +8,7 @@ export { ResetButton } from './common/ResetButton';
 export { ResultList } from './common/ResultList';
 export { ResultListItem } from './common/ResultListItem';
 export { DiceResultItem } from './common/DiceResultItem';
+export { Heading2 } from './common/Heading2';
 
 export { Header } from './layouts/Header';
 export { Nav } from './layouts/Nav';
@@ -24,3 +25,11 @@ export { SelectItem } from './preset/SelectItem';
 
 export { CustomContent } from './custom/CustomContent';
 export { InputFormula } from './custom/InputFormula';
+
+export { DiceIcon } from './svg/DiceIcon';
+export { ArrowRightIcon } from './svg/ArrowRightIcon';
+export { HomeIcon } from './svg/HomeIcon';
+export { SunIcon } from './svg/SunIcon';
+export { MoonIcon } from './svg/MoonIcon';
+export { RadioCheckedIcon } from './svg/RadioCheckedIcon';
+export { RadioEmptyIcon } from './svg/RadioEmptyIcon';

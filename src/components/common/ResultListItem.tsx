@@ -4,8 +4,7 @@ import React from 'react';
 import { twJoin } from 'tailwind-merge';
 import { RollResult } from '@nihilapp/dice';
 import { nihilTool } from '@nihilapp/tools';
-import { Icon } from '@iconify/react';
-import { DiceResultItem } from '@/src/components';
+import { ArrowRightIcon, DiceIcon, DiceResultItem } from '@/src/components';
 
 interface Props {
   resultItem: RollResult[];
@@ -36,11 +35,11 @@ export function ResultListItem({ resultItem, }: Props) {
         <div key={nihilTool.common.uuid()} className='first:pt-4'>
           <div className={css.diceOne}>
             <div className={css.formula}>
-              <Icon icon='iconoir:hexagon-dice' className='mt-[2px]' />
+              <DiceIcon />
               <span>{item.formula}</span>
             </div>
             <div className={css.total}>
-              <Icon icon='fa:arrow-right' className='mt-[2px]' />
+              <ArrowRightIcon />
               <span>{item.total}</span>
             </div>
           </div>

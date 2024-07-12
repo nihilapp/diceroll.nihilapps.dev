@@ -1,16 +1,15 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import { usePathname } from 'next/navigation';
 import { nihilTool } from '@nihilapp/tools';
-import { Icon } from '@iconify/react';
 import {
-  InputFormula,
+  InputFormula, RadioCheckedIcon, RadioEmptyIcon,
   ResetButton, ResultList, RollButton
 } from '@/src/components';
 import {
-  diceStore, resetRollResult, setFormulaString, setRollType
+  diceStore, resetRollResult, setDiceMessage, setFormulaString, setRollType
 } from '@/src/entities';
 
 interface Props {
@@ -31,6 +30,7 @@ export function CustomContent({ className, }: Props) {
     setFormulaString('');
     resetRollResult();
     setRollType('default');
+    setDiceMessage('주사위를 굴린 이력이 없습니다.');
   }, [ pathname, ]);
 
   const onChangeRadio = useCallback(
@@ -45,14 +45,17 @@ export function CustomContent({ className, }: Props) {
       ``,
       className,
     ]),
-    radio: twJoin([
-      `flex flex-row gap-1 items-center`,
-    ]),
+    radio(value: string) {
+      return twJoin([
+        `flex flex-row items-center cursor-pointer hover:text-red-500 rounded-1 p-1`,
+        rollType === value && `bg-black-400 text-black-50 hover:text-black-50 !cursor-default`,
+      ]);
+    },
   };
 
   return (
     <>
-      <div className='flex flex-col gap-1'>
+      <div className='flex flex-col gap-1 p-4 white-block mb-5'>
         <InputFormula />
         <div className='flex flex-row gap-1 items-stretch'>
           <div className='flex-1 shrink-0 flex flex-row gap-2 items-center'>
@@ -60,7 +63,7 @@ export function CustomContent({ className, }: Props) {
               <label
                 key={nihilTool.common.uuid()}
                 htmlFor={radio.value}
-                className={css.radio}
+                className={css.radio(radio.value)}
               >
                 <input
                   type='radio'
@@ -72,9 +75,9 @@ export function CustomContent({ className, }: Props) {
                   className='mr-1 hidden'
                 />
                 {rollType === radio.value ? (
-                  <Icon icon='mdi:radio-button-checked' fontSize='120%' />
+                  <RadioCheckedIcon className='text-[140%]' />
                 ) : (
-                  <Icon icon='mdi:radio-button-unchecked' fontSize='120%' />
+                  <RadioEmptyIcon className='text-[140%]' />
                 )}
                 <span>{radio.label}</span>
               </label>

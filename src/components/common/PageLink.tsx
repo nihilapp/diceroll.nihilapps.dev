@@ -1,20 +1,21 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  type SVGProps
+} from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import Link from 'next/link';
-import { Icon } from '@iconify/react';
 import { usePathname } from 'next/navigation';
 
 interface Props {
   className?: ClassNameValue;
   link: string;
-  icon: string;
+  icon: SVGProps<SVGSVGElement>;
   children: React.ReactNode;
 }
 
 export function PageLink({
-  className, link, icon, children,
+  className, link, icon: Icon, children,
 }: Props) {
   const pathname = usePathname();
 
@@ -30,8 +31,8 @@ export function PageLink({
   return (
     <>
       <Link href={link} className={css.default}>
-        {icon && (
-          <Icon icon={icon} />
+        {Icon && (
+          <>{Icon}</>
         )}
 
         <span>{children}</span>

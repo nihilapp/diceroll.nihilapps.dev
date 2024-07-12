@@ -5,6 +5,7 @@ type DiceState = {
   formulaString: string;
   rollType: ('default' | 'min' | 'max');
   rollResults: RollResult[][];
+  diceMessage: string;
 };
 
 export const diceStore = create<DiceState>(
@@ -12,6 +13,7 @@ export const diceStore = create<DiceState>(
     formulaString: '',
     rollType: 'default',
     rollResults: [],
+    diceMessage: '주사위를 굴린 이력이 없습니다.',
   })
 );
 
@@ -38,5 +40,11 @@ export function resetRollResult() {
 export function setRollType(value: ('default' | 'min' | 'max')) {
   diceStore.setState({
     rollType: value,
+  });
+}
+
+export function setDiceMessage(value: string) {
+  diceStore.setState({
+    diceMessage: value,
   });
 }

@@ -18,5 +18,6 @@ export {
   setFormulaString,
   addRollResult,
   resetRollResult,
-  setRollType
+  setRollType,
+  setDiceMessage
 } from './dice/dice.store';

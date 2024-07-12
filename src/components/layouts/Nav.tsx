@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { PageLink } from '@/src/components';
+import { DiceIcon, HomeIcon, PageLink } from '@/src/components';
 
 interface Props {
   className?: ClassNameValue
@@ -20,9 +20,9 @@ export function Nav({ className, }: Props) {
   return (
     <>
       <nav className={css.default}>
-        <PageLink link='/' icon='mdi:home'>설명서</PageLink>
-        <PageLink link='/preset' icon='iconoir:hexagon-dice'>기본 주사위</PageLink>
-        <PageLink link='/custom' icon='iconoir:hexagon-dice'>커스텀 주사위</PageLink>
+        <PageLink link='/' icon={<HomeIcon />}>설명서</PageLink>
+        <PageLink link='/preset' icon={<DiceIcon />}>기본 주사위</PageLink>
+        <PageLink link='/custom' icon={<DiceIcon />}>커스텀 주사위</PageLink>
       </nav>
     </>
   );

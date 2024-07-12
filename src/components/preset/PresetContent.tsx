@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import {
   ResetButton, ResultList, RollButton, SelectFormula
 } from '@/src/components';
-import { resetRollResult, setFormulaString } from '@/src/entities';
+import { resetRollResult, setDiceMessage, setFormulaString } from '@/src/entities';
 
 interface Props {
   className?: ClassNameValue;
@@ -18,6 +18,7 @@ export function PresetContent({ className, }: Props) {
   useEffect(() => {
     setFormulaString('D2');
     resetRollResult();
+    setDiceMessage('주사위를 굴린 이력이 없습니다.');
   }, [ pathname, ]);
 
   const css = {
@@ -32,7 +33,7 @@ export function PresetContent({ className, }: Props) {
 
   return (
     <>
-      <div className='flex flex-row gap-1'>
+      <div className='white-block p-4 flex flex-row gap-1 mb-5'>
         <SelectFormula />
         <RollButton />
         <ResetButton />

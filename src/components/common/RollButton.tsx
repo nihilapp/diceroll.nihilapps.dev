@@ -3,7 +3,9 @@
 import React, { useCallback } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
 import { Dice } from '@nihilapp/dice';
-import { addRollResult, diceStore } from '@/src/entities';
+import {
+  addRollResult, diceStore, setDiceMessage
+} from '@/src/entities';
 
 interface Props {
   className?: ClassNameValue;
@@ -15,6 +17,7 @@ export function RollButton({ className, }: Props) {
   const onClickRoll = useCallback(
     () => {
       if (!formulaString) {
+        setDiceMessage('주사위식을 입력하세요.');
         return;
       }
 

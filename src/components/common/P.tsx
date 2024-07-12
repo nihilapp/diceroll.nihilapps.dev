@@ -13,7 +13,7 @@ export function P({ className, children, isLast, }: Props) {
   const css = {
     default: twJoin([
       `text-justify mb-4`,
-      isLast && `mb-0`,
+      isLast && `!mb-0`,
       className,
     ]),
   };

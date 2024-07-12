@@ -2,8 +2,8 @@
 
 import React, { useCallback } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { Icon } from '@iconify/react';
 import { commonStore, setDarkMode } from '@/src/entities';
+import { MoonIcon, SunIcon } from '@/src/components';
 
 interface Props {
   className?: ClassNameValue;
@@ -53,7 +53,7 @@ export function ToggleDarkMode({ className, }: Props) {
           onClick={onToggleLight}
           className={css.dark}
         >
-          <Icon icon='radix-icons:moon' className={css.icon} />
+          <MoonIcon className={css.icon} />
         </button>
       ) : (
         <button
@@ -61,7 +61,7 @@ export function ToggleDarkMode({ className, }: Props) {
           onClick={onToggleDark}
           className={css.light}
         >
-          <Icon icon='radix-icons:sun' className={css.icon} />
+          <SunIcon className={css.icon} />
         </button>
       )}
     </>

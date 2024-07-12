@@ -2,7 +2,7 @@
 
 import React, { useCallback } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { resetRollResult, setFormulaString } from '@/src/entities';
+import { resetRollResult } from '@/src/entities';
 
 interface Props {
   className?: ClassNameValue;
@@ -12,7 +12,6 @@ export function ResetButton({ className, }: Props) {
   const onClickReset = useCallback(
     () => {
       resetRollResult();
-      setFormulaString('');
     },
     []
   );
@@ -31,7 +30,7 @@ export function ResetButton({ className, }: Props) {
         className={css.default}
         onClick={onClickReset}
       >
-        초기화
+        비우기
       </button>
     </>
   );

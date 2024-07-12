@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { enableCache } from '@iconify/react';
+import { usePathname } from 'next/navigation';
 import {
   AppMain, Aside, Footer, GoogleAD, Header
 } from '@/src/components';
@@ -13,6 +14,10 @@ interface Props {
 }
 
 export function DefaultPage({ children, }: Props) {
+  const pathname = usePathname();
+
+  const pathnameCond = (pathname === '/custom') || (pathname === '/preset');
+
   return (
     <>
       <Header />
@@ -23,9 +28,13 @@ export function DefaultPage({ children, }: Props) {
         <AppMain>
           <GoogleAD />
 
-          <div className='white-block p-4'>
-            {children}
-          </div>
+          {pathnameCond ? (
+            <>{children}</>
+          ) : (
+            <div className='white-block p-4'>
+              {children}
+            </div>
+          )}
         </AppMain>
       </div>
 

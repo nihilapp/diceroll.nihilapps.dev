@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { Formula, P } from '@/src/components';
+import { Formula, Heading2, P } from '@/src/components';
 
 interface Props {
   className?: ClassNameValue;
@@ -14,9 +14,6 @@ export function HomeContent({ className, }: Props) {
       `bg-white rounded-2 shadow-md p-2`,
       className,
     ]),
-    heading2: twJoin([
-      `mb-4 text-[120%] font-900 p-2 border-l-[15px] border-red-500 bg-black-base text-white dark:bg-white dark:text-black-base rounded-r-2`,
-    ]),
     dt: twJoin([
       `bg-black-500 text-white p-1 rounded-t-2 text-center dark:bg-black-400`,
     ]),
@@ -27,11 +24,11 @@ export function HomeContent({ className, }: Props) {
 
   return (
     <>
-      <h2 className={css.heading2}>DiceRoll 소개</h2>
+      <Heading2>DiceRoll 소개</Heading2>
 
       <P>DiceRoll은 TRPG를 하다가 만들게 된 웹 프로그램입니다. 주사위를 간편하게 굴릴 수 있습니다. 미리 준비된 주사위를 굴릴 수도 있고 커스텀 주사위를 굴릴 수도 있습니다. TRPG 뿐만 아니라 다양한 용도로 사용할 수도 있습니다. 좌측 메뉴에서 기본 주사위, 커스텀 주사위를 클릭해서 해당 페이지로 넘어갈 수 있습니다.</P>
 
-      <h2 className={css.heading2}>사용법</h2>
+      <Heading2>사용법</Heading2>
 
       <div>
         <P>DiceRoll에서는 주사위를 굴리는 식을 주사위식이라고 부릅니다. 주사위식은 아래와 같이 표현 가능합니다. 상술했듯이 DiceRoll은 기본 주사위와 커스텀 주사위를 굴릴 수 있습니다.</P>

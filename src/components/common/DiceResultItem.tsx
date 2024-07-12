@@ -3,8 +3,8 @@
 import React from 'react';
 import { twJoin } from 'tailwind-merge';
 import { nihilTool } from '@nihilapp/tools';
-import { Icon } from '@iconify/react';
 import { DiceItem, DiceResult } from '@nihilapp/dice';
+import { ArrowRightIcon, DiceIcon } from '@/src/components';
 
 interface Props {
   dice: DiceResult;
@@ -59,11 +59,11 @@ export function DiceResultItem({ dice, mod, }: Props) {
       <div className={css.diceBox}>
         <div className={css.formulaBox}>
           <div className={css.formula}>
-            <Icon icon='iconoir:hexagon-dice' className='mt-[2px]' />
+            <DiceIcon />
             <span>{formula}</span>
           </div>
           <div className={css.total}>
-            <Icon icon='fa:arrow-right' className='mt-[2px]' />
+            <ArrowRightIcon />
             <span>{total}</span>
           </div>
         </div>
