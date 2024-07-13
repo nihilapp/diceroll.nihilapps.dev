@@ -48,7 +48,7 @@ export function CustomContent({ className, }: Props) {
     radio(value: string) {
       return twJoin([
         `flex flex-row items-center cursor-pointer hover:text-red-500 rounded-1 p-1`,
-        rollType === value && `bg-black-400 text-black-50 !hover:text-black-50 !cursor-default`,
+        rollType === value && `bg-black-400 text-black-50 hover:!text-black-50 !cursor-default`,
       ]);
     },
   };

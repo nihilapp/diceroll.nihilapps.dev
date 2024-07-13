@@ -35,21 +35,11 @@ export function DiceResultItem({ dice, mod, }: Props) {
     ignore: twJoin([
       `bg-black-300 rounded-2 text-black-base p-2 pb-1`,
     ]),
-    mod: twJoin([
-      `bg-white rounded-2 text-black-base p-2 pb-1`,
-    ]),
     dice(item: DiceItem) {
       return twJoin([
         `inline-block px-3 rounded-1 text-white bg-black-400 border-2 border-black-400 mb-1 mr-1`,
         item.isFumble && `!bg-red-500 !text-white !border-red-500`,
         item.isCritical && `!bg-green-600 !text-white !border-green-600`,
-      ]);
-    },
-    modItem(item: number) {
-      return twJoin([
-        `inline-block px-3 rounded-1 text-white border-2 mb-1 mr-1`,
-        item > 0 && `bg-green-600 border-green-600`,
-        item < 0 && `bg-red-500 border-red-500`,
       ]);
     },
   };
@@ -87,21 +77,6 @@ export function DiceResultItem({ dice, mod, }: Props) {
                   className={css.dice(ignore)}
                 >
                   {ignore.dice}
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-        {mod.length !== 0 && (
-          <>
-            <div className='mt-4 mb-1'>보정</div>
-            <div className={css.mod}>
-              {mod.map((item) => (
-                <div
-                  key={nihilTool.common.uuid()}
-                  className={css.modItem(item)}
-                >
-                  {item}
                 </div>
               ))}
             </div>
