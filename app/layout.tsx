@@ -44,6 +44,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: configData.url,
   },
+  other: {
+    'google-site-verification': 'ZCAfZPjfqjdupV02stNW27UvV_k7SCQdJJPEfRQZOTc',
+  },
 };
 
 interface Props {
