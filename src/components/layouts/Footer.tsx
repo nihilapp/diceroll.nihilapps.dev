@@ -25,7 +25,19 @@ export function Footer({ className, }: Props) {
     <>
       <footer className={css.default}>
         <div className='white-block flex flex-col gap-1'>
-          <small className='mb-2'>DiceRoll {configData.version}</small>
+          <div className='flex flex-row gap-3 items-center justify-center mb-2'>
+            <small>DiceRoll {configData.version}</small>
+            <small>
+              <a
+                href='https://github.com/NIHILncunia'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='dark:!bg-black-50 bg-black-base dark:!text-black-base text-white p-1 px-2 rounded-1 inline-block text-[90%] font-900 hover:!bg-red-500 dark:hover:!bg-red-500 dark:hover:!text-black-50'
+              >
+                깃허브
+              </a>
+            </small>
+          </div>
 
           <small className='flex flex-row gap-3 justify-center'>
             <Link href='/terms' className='underline hover:text-red-500'>이용약관</Link>
