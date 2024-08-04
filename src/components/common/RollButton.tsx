@@ -2,7 +2,7 @@
 
 import React, { useCallback } from 'react';
 import { ClassNameValue, twJoin } from 'tailwind-merge';
-import { Dice } from '@nihilapp/dice';
+import { Dice, RollError, RollResult } from '@nihilapp/dice';
 import {
   addRollResult, diceStore, setDiceMessage
 } from '@/src/entities';
@@ -26,7 +26,12 @@ export function RollButton({ className, }: Props) {
         mode: rollType,
       });
 
-      addRollResult(result);
+      if ('errorNumber' in (result as RollError)) {
+        setDiceMessage((result as RollError).errorMessage);
+        return;
+      }
+
+      addRollResult(result as RollResult[]);
     },
     [ formulaString, rollType, ]
   );

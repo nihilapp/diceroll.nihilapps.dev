@@ -1332,10 +1332,10 @@
   dependencies:
     third-party-capital "1.0.20"
 
-"@nihilapp/dice@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@nihilapp/dice/-/dice-0.1.8.tgz#110704a91559a0c963147cb18f83f4bb218ba10a"
-  integrity sha512-24MqYR0Yrccun8UiLPeNUH2Gjq/tb669Xhi9ReQtAZStMfGStAOjQ5p2Q3cs1roSpS8C2IUZrDiBB3bcfPfhLQ==
+"@nihilapp/dice@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@nihilapp/dice/-/dice-0.1.10.tgz#fc0de2d943c0c97791f0e5dfff21f8df153ff0b7"
+  integrity sha512-od/M83izY/cNwNRsC10cykdkF4u0Ju4snEpQZ81TzD1VQXTKpffbKzzjt/anabEc58ayhRW8ta5iLSviCWvgBA==
 
 "@nihilapp/tools@^0.0.3":
   version "0.0.3"
